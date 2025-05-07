@@ -1,0 +1,28 @@
+import React from "react";
+import Navbar from "./components/Navbar";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import { Toaster } from "react-hot-toast";
+import Footer from "./components/Footer";
+
+const App = () => {
+  const isSellerPath = useLocation().pathname.includes("seller");
+  return (
+    <div>
+      {isSellerPath ? null : <Navbar />}
+
+      <Toaster />
+      <div
+        className={`${isSellerPath ? "" : "px6 md:px-16 lg:px-24 lx:px-32"}`}
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </div>
+
+      {!isSellerPath && <Footer />}
+    </div>
+  );
+};
+
+export default App;
